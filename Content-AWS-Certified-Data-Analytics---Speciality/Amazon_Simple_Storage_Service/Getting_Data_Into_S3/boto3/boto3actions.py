@@ -1,13 +1,14 @@
 import boto3
 
 # Initialize interfaces
-s3Client = boto3.client('s3')
+s3Client = boto3.client('s3') #official boto client to use for python SDk
 s3Resource = boto3.resource('s3')
 
 # Create byte string to send to our bucket
-putMessage = b'Hi! I came from Boto3!'
+putMessage = b'Hi! I came from Boto3!' # this is in Binary form 
 
 # put_object
+# Simple put request to send an item to the S3 bucket into boto3put.txt file.
 response = s3Client.put_object(
     Body = putMessage,
     Bucket = 'das-demos',
@@ -21,7 +22,7 @@ toCopy = {
     'Bucket': 'das-demos',
     'Key': 'boto3put.txt'
 }
-
+# mocks resources copy through the computer client into S3 bucket. 
 s3Resource.meta.client.copy(toCopy, 'das-demos', 'boto3copy.txt')
 
 # copy_object
